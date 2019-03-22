@@ -1,0 +1,129 @@
+﻿add_namespace = modcolonies
+
+country_event = {
+	id = modcolonies.1
+	title = modcolonies.1.t
+	desc = modcolonies.1.d
+	picture = GFX_report_event_german_troops
+	fire_only_once = yes
+	trigger = {
+		all_country = {
+			has_idea = GER_OST
+		}
+	}
+	mean_time_to_happen = { days = 2 }	
+	immediate = { country_event = { id = modcolonies.2 days = 365 }}	
+	option = {
+		name = modcolonies.1.a	#sounds good
+			remove_ideas = GER_OST
+			add_timed_idea = {
+				idea = GER_OST_2
+				days = 365
+			}
+	}
+}
+country_event = {
+	id = modcolonies.2
+	title = modcolonies.1.t
+	desc = modcolonies.1.d
+	picture = GFX_report_event_german_troops
+	fire_only_once = yes
+	trigger = {
+		all_country = {
+			has_idea = GER_OST_2
+		}
+	}
+	mean_time_to_happen = { days = 2 }
+	immediate = { country_event = { id = modcolonies.3 days = 365 }}		
+	option = {
+		name = modcolonies.1.a	#sounds good
+			remove_ideas = GER_OST_2
+			add_timed_idea = {
+				idea = GER_OST_3
+				days = 365
+			}
+	}
+}
+country_event = {
+	id = modcolonies.3
+	title = modcolonies.1.t
+	desc = modcolonies.1.d
+	picture = GFX_report_event_german_troops
+	fire_only_once = yes
+	trigger = {
+		all_country = {
+			has_idea = GER_OST_3
+		}
+	}
+	mean_time_to_happen = { days = 2 }		
+	immediate = { country_event = { id = modcolonies.4 days = 365 }}	
+	option = {
+		name = modcolonies.1.a	#sounds good
+			remove_ideas = GER_OST_3
+			add_timed_idea = {
+				idea = GER_OST_4
+				days = 365
+			}
+	}
+}
+country_event = {
+	id = modcolonies.4
+	title = modcolonies.1.t
+	desc = modcolonies.1.d
+	picture = GFX_report_event_german_troops
+	fire_only_once = yes
+	trigger = {
+		all_country = {
+			has_idea = GER_OST_4
+		}
+	}
+	mean_time_to_happen = { days = 2 }	
+	immediate = { country_event = { id = modcolonies.5 days = 365 }}		
+	option = {
+		name = modcolonies.1.a	#sounds good
+			remove_ideas = GER_OST_4
+			add_timed_idea = {
+				idea = GER_OST_5
+				days = 365
+			}
+	}
+}
+country_event = {
+	id = modcolonies.5
+	title = modcolonies.5.t
+	desc = modcolonies.5.d
+	picture = GFX_report_event_german_troops
+	fire_only_once = yes
+	trigger = {
+		all_country = {
+			has_idea = GER_OST_5
+		}
+	}
+	mean_time_to_happen = { days = 2 }
+	immediate = { country_event = { id = modcolonies.6 days = 365 }}				
+	option = {
+		name = modcolonies.1.a	#sounds good
+			remove_ideas = GER_OST_5
+			add_timed_idea = {
+				idea = GER_OST_6
+				days = 365
+			}
+	}
+}
+country_event = {
+	id = modcolonies.6
+	title = modcolonies.1.t
+	desc = modcolonies.1.d
+	picture = GFX_report_event_german_troops
+	fire_only_once = yes
+	trigger = {
+		all_country = {
+			has_idea = GER_OST_6
+		}
+	}
+	mean_time_to_happen = { days = 2 }
+	immediate = { country_event = { id = modcolonies.6 days = 365 }}				
+	option = {
+		remove_ideas = GER_OST_6
+	}
+}

@@ -1,0 +1,101 @@
+﻿add_namespace = hongkong
+country_event = {
+    id = hongkong.1
+    title = hongkong.1.t
+    desc = hongkong.1.d
+    picture = GFX_report_event_royal_parade
+ 
+    fire_only_once = yes
+ 
+    trigger = {
+        original_tag = HKG
+        has_government = neutrality
+        date > 1937.4.16
+        has_start_date < 1936.01.02
+    }
+
+    mean_time_to_happen = {
+        days = 2
+    }
+    option = {
+        name = hongkong.1.a
+        retire_country_leader = yes
+        create_country_leader = {
+        	name = "Norman Smith"
+        	desc = ""
+        	picture = "Portrait_HKG_Norman_Smith.dds"
+        	expire = "1965.1.1"
+        	ideology = despotism
+        	traits = {
+        	      }
+            }
+        set_country_flag = norman_smith
+	}
+}
+country_event = {
+    id = hongkong.2
+    title = hongkong.2.t
+    desc = hongkong.2.d
+    picture = GFX_report_event_royal_parade
+ 
+    fire_only_once = yes
+ 
+    trigger = {
+        original_tag = HKG
+        has_government = neutrality
+        date > 1937.10.28
+        has_start_date < 1936.01.02
+		has_country_flag = norman_smith
+    }
+
+    mean_time_to_happen = {
+        days = 2
+    }
+    option = {
+        name = hongkong.2.a
+        retire_country_leader = yes
+        create_country_leader = {
+        	name = "Geoffry Northcote"
+        	desc = ""
+        	picture = "Portrait_HKG_Geoffry_Northcote.dds"
+        	expire = "1965.1.1"
+        	ideology = despotism
+        	traits = {
+        	      }
+            }
+        set_country_flag = geoffry_northcote
+	}
+}
+country_event = {
+    id = hongkong.3
+    title = hongkong.3.t
+    desc = hongkong.3.d
+    picture = GFX_report_event_royal_parade
+ 
+    fire_only_once = yes
+ 
+    trigger = {
+        original_tag = HKG
+        has_government = neutrality
+        date > 1937.4.16
+        has_start_date < 1936.01.02
+    }
+
+    mean_time_to_happen = {
+        days = 2
+    }
+    option = {
+        name = hongkong.3.a
+        retire_country_leader = yes
+        create_country_leader = {
+        	name = "Mark Young"
+        	desc = ""
+        	picture = "Portrait_HKG_Mark_Young.dds"
+        	expire = "1965.1.1"
+        	ideology = despotism
+        	traits = {
+        	      }
+            }
+		set_country_flag = mark_young
+	}
+}

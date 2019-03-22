@@ -1,0 +1,73 @@
+division_template = {
+	name = "Division d'Infanterie"		
+	# Represents: Division d'Infanterie (Frontline, Series A, and some Series B), Div. d'Inf. Coloniale, 
+	#	Div. d'Inf. Nord-Africaine, Div. some d'Inf. d'Afrique
+	#   Difference is their equipment, experience
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+	}
+	support = {
+		artillery = { x = 0 y = 0 } 	# Heavy Arty Regiment had 2x 155mm battalions
+	}
+}
+
+division_template = {
+	name = "Brigade Coloniale"			# Represents: 2xRgt colonial forces and , usually with old equipment
+
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+	}
+	priority = 0
+}
+
+
+units = {
+
+	division= {	
+		name = "Division de Tonkin"
+		location = 4075
+		division_template = "Division d'Infanterie" 			# Reserve Division (low experience, reserve equip)
+		force_equipment_variants = { infantry_equipment_0 = { owner = "FRA" } }
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.3
+
+	}
+	division= {	
+		name = "Division de Cochinchine-Cambodge"
+		location = 4401
+		division_template = "Division d'Infanterie" 			# Reserve Division (low experience, reserve equip)
+		force_equipment_variants = { infantry_equipment_0 = { owner = "FRA" } }
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.3
+
+	}
+	division= {	
+		name = "Brigade d'Annam-Laos"	
+		location = 7376
+		division_template = "Brigade Coloniale"				# Reserve Brigade (low experience, reserve equip)
+		force_equipment_variants = { infantry_equipment_0 = { owner = "FRA" } }
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.3
+
+	}
+
+
+	navy = {				
+		name = "Flotte du Extrême Orient"			# CO: Decoux
+		location = 4401 # Saigon			
+		ship = { name = "Suffren" definition = heavy_cruiser equipment = { heavy_cruiser_1 = { amount = 1 owner = FRA } } }
+		ship = { name = "Lamotte-Picquet" definition = light_cruiser equipment = { light_cruiser_1 = { amount = 1 owner = FRA } } }
+	}
+
+}

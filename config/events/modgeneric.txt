@@ -1,0 +1,20 @@
+﻿add_namespace = modgeneric
+
+#Remove Bolshevik Threat
+country_event = {
+	id = modgeneric.1
+	title = modgeneric.1.t
+	desc = modgeneric.1.d
+	picture = GFX_report_event_soviet_soldiers_tank
+	trigger = {
+		has_government = communism
+		has_idea = east_bolshevik
+	}
+	mean_time_to_happen = { days = 2 }	
+	option = {
+		name = modgeneric.1.a #sounds good
+		remove_ideas = {
+			east_bolshevik
+		}
+	}
+}

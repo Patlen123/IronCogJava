@@ -1,0 +1,41 @@
+﻿add_namespace = modbelarus
+
+#NO MORE REICHKOMS
+country_event = {
+	id = modbelarus.1
+	title = modbelarus.1.t
+	desc = modbelarus.1.d
+	picture = GFX_report_event_hitler_handshake
+	mean_time_to_happen = { days = 2 }		
+	trigger = {
+		tag = BLR
+		has_cosmetic_tag = RKO
+		NOT = {
+			is_subject_of = GER
+		}
+	}
+	option = {
+		name = modbelarus.1.a #sounds good
+		drop_cosmetic_tag = yes
+		create_country_leader = {
+			name = "Radaslau Astrouski"
+			desc = ""
+			picture = "gfx/leaders/Europe/Portrait_Europe_Generic_land_3.dds"
+			expire = "1965.1.1"
+			ideology = fascism_ideology
+			traits = {
+				#
+			}
+		}
+		set_party_name = { ideology = fascism long_name = BLR_fascism_party_long name = BLR_fascism_party}
+		every_state = {
+			limit = {
+				is_owned_by = BLR
+			}
+			add_core_of = BLR
+		}
+		remove_ideas = GER_OST
+		remove_ideas = GER_antisemitism
+		
+	}
+}

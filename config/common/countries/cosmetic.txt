@@ -1,0 +1,56 @@
+
+MAL_UK = {
+    color = rgb { 206 17 38 }
+    color_ui = rgb { 206 17 38 }
+}
+
+INS_HOL = {
+    color = rgb { 203 138 74 }
+    color_ui = rgb { 255 179 96 }
+}
+
+BYZ = {
+    color = rgb { 128 0 128 }
+    color_ui = rgb { 128 0 128 }
+}
+OTT = {
+    color = rgb { 159 0 29 }
+    color_ui = rgb { 159 0 29 }
+}
+VIN_FRA = {
+	color = rgb { 0 36 125 }
+	color_ui = rgb { 0 36 125 }
+}
+BHN = {
+	color = HSV { 0.1 0.15 0.4 }
+	color_ui = rgb { 138 155 116 }
+}
+GGM = {
+	color = HSV { 0.1 0.15 0.4 }
+	color_ui = rgb { 138 155 116 }
+}
+RKU = {
+	color = HSV { 0.1 0.15 0.4 }
+	color_ui = rgb { 138 155 116 }
+}
+SOV_SOV = {
+	color = rgb { 125 13 24 }
+	color_ui = rgb { 163 17 31 }
+}
+RKO = {
+	color = HSV { 0.1 0.15 0.4 }
+	color_ui = rgb { 138 155 116 }
+}
+RKK = {
+	color = HSV { 0.1 0.15 0.4 }
+	color_ui = rgb { 138 155 116 }
+}
+HUN_EMPIRE = {
+	color = rgb { 194 198 215 }
+	color_ui = rgb { 255 255 255 }
+}
+
+AUS_NOT_WHITE = {	
+	color = rgb { 249 126 98 }
+	color_ui = rgb { 255 164 127 }
+}

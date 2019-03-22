@@ -1,0 +1,189 @@
+﻿add_namespace = modgreece
+
+#Istanbul not Constantinople
+country_event = {
+	id = modgreece.1
+	title = modgreece.1.t
+	desc = modgreece.1.d
+	picture = GFX_event_byzantine
+	trigger = {
+		tag = GRE
+		owns_state = 341	
+		NOT = {
+			has_cosmetic_tag = BYZ
+		}
+		is_subject = no
+	}
+	mean_time_to_happen = { days = 2 }	
+	option = {
+		name = modgreece.1.a	#sounds good
+		set_cosmetic_tag = BYZ
+		set_province_name = { id = 9833 name = "Konstantinoúpolis"}
+		set_capital = 341		
+		341 = {
+			add_core_of = GRE
+		}
+		49 = {
+			add_core_of = GRE
+		}	
+		339 = {
+			add_core_of = GRE
+		}
+		340 = {
+			add_core_of = GRE
+		}
+		341 = {
+			add_core_of = GRE
+		}
+		342 = {
+			add_core_of = GRE
+		}
+		343 = {
+			add_core_of = GRE
+		}
+		344 = {
+			add_core_of = GRE
+		}
+		345 = {
+			add_core_of = GRE
+		}
+		346 = {
+			add_core_of = GRE
+		}
+		347 = {
+			add_core_of = GRE
+		}
+		348 = {
+			add_core_of = GRE
+		}
+		349 = {
+			add_core_of = GRE
+		}
+		350 = {
+			add_core_of = GRE
+		}
+		352 = {
+			add_core_of = GRE
+		}
+		353 = {
+			add_core_of = GRE
+		}
+		354 = {
+			add_core_of = GRE
+		}
+		355 = {
+			add_core_of = GRE
+		}
+		356 = {
+			add_core_of = GRE
+		}
+		create_country_leader = {
+			name = "Georgios I"
+			desc = ""
+			picture = "gfx/leaders/GRE/Portrait_GRE_Georgios_I.dds"
+			expire = "1965.1.1"
+			ideology = despotism
+			traits = {
+			#
+			}
+		}
+	}
+}
+# LOSE Constantinople
+country_event = {
+	id = modgreece.2
+	title = modgreece.2.t
+	desc = modgreece.2.d
+	picture = GFX_event_ottoman
+	trigger = {
+		tag = GRE
+		NOT = {
+			owns_state = 341
+		}	
+		has_cosmetic_tag = BYZ
+	}
+	mean_time_to_happen = { days = 2 }	
+	option = {
+		name = modgreece.2.a	#sounds good
+		drop_cosmetic_tag = yes
+		reset_province_name = 9833
+		create_country_leader = {
+			name = "George II"
+			desc = ""
+			picture = "gfx/leaders/GRE/Portrait_GRE_George_II.dds"
+			expire = "1965.1.1"
+			ideology = despotism
+			traits = {
+				#
+			}
+		}
+	}
+}
+#BASIL
+country_event = {
+	id = modgreece.3
+	title = modgreece.3.t
+	desc = modgreece.3.d
+	picture = GFX_event_byzantine
+	trigger = {
+		tag = GRE
+		has_government = fascism
+		has_cosmetic_tag = BYZ
+		has_idea = GRE_george_ii
+		NOT = {
+			has_country_flag = GRE_refused_basileus
+		}
+	}
+	mean_time_to_happen = { days = 2 }	
+	option = {
+		name = modgreece.3.a	#sounds good
+		set_politics = {
+			ruling_party = neutrality
+			elections_allowed = no
+		}	
+		add_popularity = {
+			ideology = neutrality
+			popularity = +0.20
+		}
+		remove_ideas = GRE_george_ii
+	}
+	option = {
+		name = modgreece.3.b	#no way
+		remove_ideas = GRE_george_ii
+		add_ideas = GRE_georgios_i
+		set_country_flag = GRE_refused_basileus
+	}	
+}
+#4th August Regime
+country_event = {
+	id = modgreece.4
+	title = modgreece.4.t
+	desc = modgreece.4.d
+	picture = GFX_report_event_royal_parade
+	trigger = {
+		tag = GRE
+		has_government = neutrality
+		date > 1936.8.4
+		has_start_date < 1936.10.4
+		NOT = {
+			has_country_flag = GRE_4th_refused
+		}
+	}
+	mean_time_to_happen = { days = 2 }	
+	option = {
+		name = modgreece.4.a	#sounds good
+		set_politics = {
+			ruling_party = fascism
+			elections_allowed = no		
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = +0.20
+		}
+		add_ideas = GRE_george_ii	
+	}
+	option = {
+		name = modgreece.4.b	#no way
+		set_country_flag = GRE_4th_refused
+	}	
+}

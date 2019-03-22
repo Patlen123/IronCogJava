@@ -1,0 +1,3190 @@
+add_namespace = modgermany
+
+#Britain Wants Axis
+country_event = {
+	id = modgermany.1
+	title = modgermany.1.t
+	desc = modgermany.1.d
+	picture = GFX_report_event_hitler_handshake
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = modgermany.1.a	#sounds good
+		ai_chance = { factor = 90 }
+		add_to_faction = ENG
+		}
+	option = {
+		name = modgermany.1.b	#no way
+		ai_chance = { factor = 10 }
+		ENG = {
+			country_event = { id = modbritain.5 }
+		}
+	}
+}
+
+#Bohmen-Mahren
+country_event = {
+	id = modgermany.2
+	title = modgermany.2.t
+	desc = modgermany.2.d
+	picture = GFX_event_bohmenmahren
+	fire_only_once = yes
+	trigger = {
+		tag = GER
+		has_government = fascism
+		9 = {
+			is_owned_by = GER
+		}
+		75 = {
+			is_owned_by = GER
+		}
+		NOT = {
+			CZE = {
+				is_in_faction_with = GER
+				is_subject_of = GER
+			}
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			set_province_name = { id = 11542 name = "Prag"}
+			set_province_name = { id = 6418 name = "Pilsen"}
+			set_province_name = { id = 3569 name = "Brünn"}	
+		}
+	}
+	option = {
+		name = modgermany.2.a	#sounds good
+		ai_chance = { factor = 90 }		
+		set_autonomy = {
+			target = CZE
+			autonomy_state = autonomy_integrated_puppet
+		}		
+		CZE = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			set_cosmetic_tag = BHN
+			create_country_leader = {
+				name = "Konstantin von Neurath"
+				desc = ""
+				picture = "gfx/leaders/CZE/Portrait_CZE_Konstantin_Neurath.dds"
+				expire = "1965.1.1"
+				ideology = nazism
+				traits = {
+				#
+				}
+			}
+			set_party_name = { ideology = fascism long_name = GER_fascism_party_long name = GER_fascism_party}
+			remove_ideas = {
+				CZE_skoda_works
+				CZE_divided_nation
+				CZE_fortification_focus
+			}
+		}	
+		if = {
+			limit = {
+				9 = {
+					OR = {
+						is_owned_by = GER
+						any_other_country = {
+							controls_state = 9
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 9
+							}
+						}
+					}
+				}
+			}
+			CZE = { transfer_state = 9 }
+		}
+
+		
+		if = {
+			limit = {			
+				75 = {
+					OR = {
+						any_other_country = {
+							controls_state = 75
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 75
+							}
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			CZE = { transfer_state = 75 }
+		}
+		if = {
+			limit = {
+				GER = {
+					has_idea = GER_antisemitism
+				}
+			}
+			CZE = { add_ideas = GER_antisemitism }
+		}
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_owned_by = CZE
+				}
+				add_core_of = CZE
+			}
+			CZE = {
+				add_ideas = disarmed_nation
+				add_ideas = tot_economic_mobilisation
+			}
+		}
+	}
+	option = {
+		name = modgermany.2.b	#sounds good
+		ai_chance = { factor = 10 }
+	}
+}
+#Kristallnacht
+country_event = {
+	id = modgermany.3
+	title = modgermany.3.t
+	desc = modgermany.3.d
+	picture = GFX_event_kristallnacht
+	fire_only_once = yes
+	trigger = {
+		tag = GER
+		date > 1938.11.9
+		has_start_date < 1936.11.9
+		has_government = fascism
+	}	
+	mean_time_to_happen = { days = 2 }	
+	option = {
+		name = modgermany.3.a	#sounds good
+		ai_chance = { factor = 95 }
+		GER = {
+			add_ideas = GER_antisemitism
+		}
+		every_country = {
+			limit = {
+				is_subject_of = GER
+			}
+			add_ideas = GER_antisemitism
+		}
+		POL = {
+			if = {
+				limit = {
+					is_in_faction_with = GER
+				}
+				add_ideas = POL_ghettos
+				add_ideas = POL_arbeiter
+			}	
+		}
+		UKR = {
+			if = {
+				limit = {
+					is_in_faction_with = GER
+				}
+				add_ideas = UKR_collab
+			}
+		}
+		BLR = {
+			if = {
+				limit = {
+					is_in_faction_with = GER
+				}
+				add_ideas = {
+					GER_OST
+				}
+			}
+		}		
+		hidden_effect = {
+			news_event = { hours = 6 id = modnews.14 }
+		}
+		set_country_flag = GER_semitic_choice
+	}
+}
+#GeneralGouvernment
+country_event = {
+	id = modgermany.4
+	title = modgermany.4.t
+	desc = modgermany.4.d
+	picture = GFX_report_event_hitler_handshake
+	fire_only_once = yes
+	trigger = {
+		tag = GER
+		has_government = fascism
+		92 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 92
+					is_in_faction_with = GER
+					NOT = {
+							owns_state = 92
+					}
+				}
+			}	
+		}
+		10 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 10
+					is_in_faction_with = GER
+					NOT = {
+						owns_state = 10
+					}					
+				}
+			}			
+		}
+		90 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 90
+					is_in_faction_with = GER
+					NOT = {
+						owns_state = 90
+					}					
+				}
+			}
+		}
+		88 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 88
+					is_in_faction_with = GER
+					NOT = {
+						owns_state = 88
+					}					
+				}
+			}
+		}
+		POL = {
+			OR = {
+				has_capitulated = yes 
+				exists = no
+			}
+			NOT = {
+				is_in_faction_with = GER
+				is_subject_of = GER
+			}
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			set_province_name = { id = 6558 name = "Posen"}
+			set_province_name = { id = 9263 name = "Gdingen"}
+			set_province_name = { id = 9508 name = "Litzmannstadt"}
+			set_province_name = { id = 9427 name = "Krakau"}	
+			set_province_name = { id = 3544 name = "Warschau"}				
+		}
+	}	
+	option = {
+		name = modgermany.4.a	#sounds good
+		ai_chance = { factor = 90 }		
+		set_autonomy = {
+			target = POL
+			autonomy_state = autonomy_puppet
+		}		
+		POL = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			set_cosmetic_tag = GGM
+			create_country_leader = {
+				name = "Hans Frank"
+				desc = ""
+				picture = "gfx/leaders/POL/Portrait_POL_Hans_Frank.dds"
+				expire = "1965.1.1"
+				ideology = nazism
+				traits = {
+				#
+				}
+			}
+			set_party_name = { ideology = fascism long_name = GER_fascism_party_long name = GER_fascism_party}
+			set_capital = 88
+			remove_ideas = {
+				east_bolshevik
+				besieged
+			}
+		}
+		if = {
+			limit = {
+				92 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 92
+							is_in_faction_with = GER
+							
+						}
+					}
+				}
+			}
+			POL = { 
+				transfer_state = 92
+				set_state_controller = 92
+			}
+			
+		}
+
+		
+		if = {
+			limit = {			
+				10 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 10
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 10
+							}							
+						}
+					}
+				}
+			}
+			POL = { 
+				transfer_state = 10 
+				set_state_controller = 10
+			}
+			
+		}
+		
+		if = {
+			limit = {			
+				90 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 90
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 90
+							}							
+						}
+					}
+				}
+			}
+			POL = { 
+				transfer_state = 90
+				set_state_controller = 90
+			}
+		}
+		if = {
+			limit = {			
+				88 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 88
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 88
+							}							
+						}
+					}
+				}
+			}
+			POL = { 
+				transfer_state = 88 
+				set_state_controller = 88
+			}
+		}
+		if = {
+			limit = {			
+				91 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 91
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 91
+							}							
+						}
+					}
+				}
+			}
+			POL = {
+				transfer_state = 91
+				set_state_controller = 91
+			}
+		}
+		if = {
+			limit = {			
+				89 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 89
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 89
+							}							
+						}
+					}
+				}
+			}
+			POL = {
+				transfer_state = 89
+				set_state_controller = 89
+			}
+		}		
+		if = {
+			limit = {
+				GER = {
+					has_idea = GER_antisemitism
+				}
+			}
+			POL = { 
+				add_ideas = POL_ghettos
+				add_ideas = GER_antisemitism
+				add_ideas = POL_arbeiter
+			}
+		}
+		hidden_effect = {
+			91 = {
+				add_core_of = POL
+			}
+			89 = {
+				add_core_of = POL
+			}
+			if = {
+				limit = {			
+					85 = {
+						OR = {
+							is_controlled_by = GER
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 85 
+				}
+			}
+			if = {
+				limit = {			
+					86 = {
+						OR = {
+							is_controlled_by = GER
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 86 
+				}
+			}
+			if = {
+				limit = {			
+					98 = {
+						OR = {
+							is_controlled_by = GER
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 98 
+				}
+			}
+			if = {
+				limit = {			
+					97 = {
+						OR = {
+							is_controlled_by = GER
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 97 
+				}
+			}
+			if = {
+				limit = {			
+					96 = {
+						OR = {
+							is_controlled_by = GER
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 96 
+				}
+			}
+			if = {
+				limit = {			
+					95 = {
+						OR = {
+							is_controlled_by = GER
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 95 
+				}
+			}
+			if = {
+				limit = {			
+					94 = {
+						OR = {
+							is_controlled_by = GER
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 94 
+				}
+			}
+			if = {
+				limit = {			
+					93 = {
+						OR = {
+							is_controlled_by = GER
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 93 
+				}
+			}
+			if = {
+				limit = {			
+					87 = {
+						OR = {
+							is_controlled_by = GER
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 87 
+				}
+			}
+			if = {
+				limit = {			
+					72 = {
+						OR = {
+							is_controlled_by = GER
+							is_controlled_by = SLO
+						}
+					}
+				}
+				GER = { 
+					transfer_state = 72 
+				}
+			}			
+		}
+	}
+	option = {
+		name = modgermany.4.b	#sounds good
+		ai_chance = { factor = 10 }
+	}
+}
+
+# EXPAND GENERAL GOUVERNEMENT
+country_event = {
+	id = modgermany.5
+	title = modgermany.5.t
+	desc = modgermany.5.d
+	picture = GFX_report_event_hitler_handshake
+	fire_only_once = yes
+	trigger = {
+		tag = GER
+		has_government = fascism
+		91 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 91
+					is_in_faction_with = GER
+					NOT = {
+						owns_state = 91
+					}					
+				}			
+			}
+		}
+		89 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 89
+					is_in_faction_with = GER
+					NOT = {
+						owns_state = 89
+					}					
+				}			
+			}
+		}
+		POL = {
+			is_subject_of = GER
+			has_cosmetic_tag = GGM
+		}
+	}
+	
+	option = {
+		name = modgermany.5.a	#sounds good
+		ai_chance = { factor = 90 }		
+		if = {
+			limit = {			
+				89 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 91
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 89
+							}							
+						}
+					}
+				}
+			}
+			POL = {
+				transfer_state = 89
+				set_state_controller = 89
+			}
+		}
+
+		
+		if = {
+			limit = {			
+				91 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 91
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 91
+							}							
+						}
+					}
+				}
+			}
+			POL = {
+				transfer_state = 91
+				set_state_controller = 91
+			}
+		}
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_owned_by = POL
+				}
+				add_core_of = POL
+			}
+			POL = {
+				add_ideas = disarmed_nation
+				add_ideas = tot_economic_mobilisation
+			}
+		}
+	}
+	option = {
+		name = modgermany.5.b	#sounds good
+		ai_chance = { factor = 10 }
+	}
+}
+
+# DANZIG SIDES WITH POLAND #
+
+country_event = {
+	id = modgermany.6
+	title = modgermany.6.t
+	desc = modgermany.6.d
+	picture = GFX_report_event_hitler_handshake
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = modgermany.6.a	#sounds good
+		ai_chance = { factor = 90 }
+		if = {
+			limit = {
+				GER = {
+					NOT = {
+						has_war_with = DZG
+					}
+				}
+			}	
+			declare_war_on = {
+				target = DZG
+				type = take_state
+				generator = { 746 }
+			}
+		}	
+	}
+}
+
+# Establish Ukraine
+
+country_event = {
+	id = modgermany.7
+	title = modgermany.7.t
+	desc = modgermany.7.d
+	picture = GFX_report_event_german_troops
+	fire_only_once = yes
+	trigger = {
+		tag = GER
+		has_government = fascism
+		202 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 202
+					is_in_faction_with = GER
+					NOT = {
+						owns_state = 202
+					}					
+				}
+			}
+		}
+		UKR = {
+			OR = {
+				has_capitulated = yes 
+				exists = no
+			}
+			NOT = {
+				is_in_faction_with = GER
+				is_subject_of = GER
+			}
+		}
+		SOV = {
+			NOT = {
+				is_in_faction_with = GER
+			}
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			set_province_name = { id = 11479 name = "Lemberg"}
+			set_province_name = { id = 3392 name = "Brest-Litowsk"}
+			
+		}
+		UKR = { country_event = { id = modcolonies.1 days = 364 }}		
+	}
+	option = {
+		name = modgermany.7.a	#sounds good
+		ai_chance = { factor = 90 }		
+		set_autonomy = {
+			target = UKR
+			autonomy_state = autonomy_colony
+		}		
+		UKR = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			set_cosmetic_tag = RKU
+			create_country_leader = {
+				name = "Erich Koch"
+				desc = ""
+				picture = "gfx/leaders/UKR/Portrait_UKR_Erich_Koch.dds"
+				expire = "1965.1.1"
+				ideology = nazism
+				traits = {
+				#
+				}
+			}
+			set_party_name = { ideology = fascism long_name = GER_fascism_party_long name = GER_fascism_party}
+			set_capital = 202
+		}
+		if = {
+			limit = {
+				93 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 93
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 93
+							}							
+						}
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 93
+				set_state_controller = 93
+			}
+			
+		}
+		if = {
+			limit = {
+				199 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 199
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 199
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 199
+				set_state_controller = 199
+			}
+			
+		}		
+		if = {
+			limit = {
+				201 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 201
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 201
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 201
+				set_state_controller = 201
+			}
+			
+		}	
+		if = {
+			limit = {
+				202 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 202
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 202
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 202
+				set_state_controller = 202
+			}
+			
+		}
+		
+		if = {
+			limit = {
+				192 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 192
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 192
+							}							
+						}
+					}
+					ROM = {
+						is_in_faction_with = GER
+					}
+				}
+			}
+			ROM = { 
+				transfer_state = 192
+				set_state_controller = 192
+			}
+			192 = {
+				add_core_of = ROM
+			}
+		}	
+		if = {
+			limit = {
+				198 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 198
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 198
+							}							
+						}
+					}
+					ROM = {
+						is_in_faction_with = GER
+					}
+				}
+			}
+			ROM = { 
+				transfer_state = 198
+				set_state_controller = 198
+			}
+			198 = {
+				add_core_of = ROM
+			}		
+		}
+		if = {
+			limit = {
+				192 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 192
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 192
+							}							
+						}
+					}
+				}
+				NOT = {
+					GER = {
+						is_in_faction_with = ROM
+					}
+				}				
+			}
+			UKR = { 
+				transfer_state = 192
+				set_state_controller = 192
+			}
+			
+		}		
+		if = {
+			limit = {
+				198 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 198
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 198
+							}							
+						}
+						
+					}
+				}
+				NOT = {
+					GER = {
+						is_in_faction_with = ROM
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 198
+				set_state_controller = 198
+			}	
+		}
+		if = {
+			limit = {
+				203 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 203
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 203
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 203
+				set_state_controller = 203
+			}
+			
+		}
+		if = {
+			limit = {
+				197 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 197
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 197
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 197
+				set_state_controller = 197
+			}	
+		}
+		if = {
+			limit = {
+				193 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 193
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 193
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 193
+				set_state_controller = 193
+			}
+			
+		}		
+		if = {
+			limit = {
+				225 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 225
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 225
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 225
+				set_state_controller = 225
+			}
+			
+		}
+		if = {
+			limit = {
+				259 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 259
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 259
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 259
+				set_state_controller = 259
+			}
+			
+		}
+		if = {
+			limit = {
+				221 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 221
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 221
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 221
+				set_state_controller = 221
+			}
+			
+		}
+		if = {
+			limit = {
+				226 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 226
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 226
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 226
+				set_state_controller = 226
+			}
+			
+		}
+		if = {
+			limit = {
+				225 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 225
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 225
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 225
+				set_state_controller = 225
+			}
+			
+		}
+		if = {
+			limit = {
+				227 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 227
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 227
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 227
+				set_state_controller = 227
+			}
+			
+		}
+		if = {
+			limit = {
+				228 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 228
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 228
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 228
+				set_state_controller = 228
+			}
+			
+		}
+		if = {
+			limit = {
+				220 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 220
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 220
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 220
+				set_state_controller = 220
+			}
+			
+		}
+		if = {
+			limit = {
+				240 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 240
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 240
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 240
+				set_state_controller = 240
+			}
+			
+		}
+		if = {
+			limit = {
+				240 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 240
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 240
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 240
+				set_state_controller = 240
+			}
+			
+		}
+		if = {
+			limit = {
+				260 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 260
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 260
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 260
+				set_state_controller = 260
+			}
+			
+		}
+		if = {
+			limit = {
+				245 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 245
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 245
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 245
+				set_state_controller = 245
+			}
+			
+		}
+		if = {
+			limit = {
+				218 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 218
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 218
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 218
+				set_state_controller = 218
+			}
+			
+		}
+		if = {
+			limit = {
+				265 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 265
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 265
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 265
+				set_state_controller = 265
+			}
+			
+		}
+		if = {
+			limit = {
+				217 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 217
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 217
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 217
+				set_state_controller = 217
+			}
+			
+		}
+		if = {
+			limit = {
+				239 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 239
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 239
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 239
+				set_state_controller = 239
+			}
+			
+		}
+		if = {
+			limit = {
+				258 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 258
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 258
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 258
+				set_state_controller = 258
+			}
+			
+		}
+		if = {
+			limit = {
+				94 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 94
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 94
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 94
+				set_state_controller = 94
+			}
+			
+		}
+		if = {
+			limit = {
+				194 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 194
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 194
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 194
+				set_state_controller = 194
+			}
+			
+		}
+		if = {
+			limit = {
+				222 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 222
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 222
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 222
+				set_state_controller = 222
+			}
+			
+		}
+		if = {
+			limit = {
+				257 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 257
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 257
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 257
+				set_state_controller = 257
+			}
+			
+		}
+		if = {
+			limit = {
+				239 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 239
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 239
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 239
+				set_state_controller = 239
+			}
+			
+		}
+		if = {
+			limit = {
+				401 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 401
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 401
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 401
+				set_state_controller = 401
+			}
+			
+		}
+		if = {
+			limit = {
+				224 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 224
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 224
+							}							
+						}
+						
+					}
+				}
+			}
+			UKR = { 
+				transfer_state = 224
+				set_state_controller = 224
+			}
+			
+		}		
+		UKR = { 
+			add_ideas = GER_OST
+			add_ideas = GER_antisemitism
+			add_ideas = UKR_collab
+		}
+		200 = {
+			add_core_of = GER
+		}
+		196 = {
+			add_core_of = GER
+		}
+		137 = {
+			add_core_of = GER
+		}		
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_owned_by = UKR
+				}
+				add_core_of = UKR
+			}
+			93 = {
+				add_core_of = UKR
+			}
+			199 = {
+				add_core_of = UKR
+			}
+			201 = {
+				add_core_of = UKR
+			}
+			202 = {
+				add_core_of = UKR
+			}
+			192 = {
+				add_core_of = UKR
+			}
+			198 = {
+				add_core_of = UKR
+			}
+			203 = {
+				add_core_of = UKR
+			}
+			197 = {
+				add_core_of = UKR
+			}
+			193 = {
+				add_core_of = UKR
+			}
+			225 = {
+				add_core_of = UKR
+			}
+			259 = {
+				add_core_of = UKR
+			}
+			221 = {
+				add_core_of = UKR
+			}
+			226 = {
+				add_core_of = UKR
+			}
+			225 = {
+				add_core_of = UKR
+			}
+			227 = {
+				add_core_of = UKR
+			}
+			228 = {
+				add_core_of = UKR
+			}
+			220 = {
+				add_core_of = UKR
+			}
+			240 = {
+				add_core_of = UKR
+			}
+			260 = {
+				add_core_of = UKR
+			}
+			245 = {
+				add_core_of = UKR
+			}
+			218 = {
+				add_core_of = UKR
+			}
+			265 = {
+				add_core_of = UKR
+			}
+			217 = {
+				add_core_of = UKR
+			}
+			239 = {
+				add_core_of = UKR
+			}
+			222 = {
+				add_core_of = UKR
+			}
+			260 = {
+				add_core_of = UKR
+			}
+			94 = {
+				add_core_of = UKR
+			}
+			194 = {
+				add_core_of = UKR
+			}
+			224 = {
+				add_core_of = UKR
+			}
+			UKR = {
+				add_ideas = disarmed_nation
+				add_ideas = tot_economic_mobilisation
+				add_ideas = GER_antisemitism
+			}
+		}
+	}
+	option = {
+		name = modgermany.7.b	#no way
+		ai_chance = { factor = 10 }
+	}
+}
+
+# Daznig joins Reich
+country_event = {
+	id = modgermany.8
+	title = modgermany.8.t
+	desc = modgermany.8.d
+	picture = GFX_event_danzig
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = modgermany.8.a	#sounds good
+		ai_chance = { factor = 90 }	
+	}
+}
+
+# Ostland
+country_event = {
+	id = modgermany.9
+	title = modgermany.9.t
+	desc = modgermany.9.d
+	picture = GFX_report_event_german_troops
+	fire_only_once = yes
+	trigger = {
+		tag = GER
+		202 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 202
+					is_in_faction_with = GER
+					NOT = {
+						owns_state = 202
+					}					
+				}
+			}
+		}
+		NOT = {
+			BLR = {
+				is_in_faction_with = GER
+				is_subject_of = GER
+			}
+		}
+		BLR = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+			}
+		}
+		SOV = {
+			NOT = {
+				is_in_faction_with = GER
+			}
+		}
+	}
+	immediate = {
+		BLR = { country_event = { id = modcolonies.1 days = 364 }}
+		hidden_effect = {
+			11 = {
+				add_core_of = BLR
+			}			
+			13 = {
+				add_core_of = BLR
+			}				
+			95 = {
+				add_core_of = BLR
+			}
+			96 = {
+				add_core_of = BLR
+			}			
+			12 = {
+				add_core_of = BLR
+			}
+			190 = {
+				add_core_of = BLR
+			}
+			189 = {
+				add_core_of = BLR
+			}
+			191 = {
+				add_core_of = BLR
+			}
+			204 = {
+				add_core_of = BLR
+			}
+			206 = {
+				add_core_of = BLR
+			}
+			207 = {
+				add_core_of = BLR
+			}
+			241 = {
+				add_core_of = BLR
+			}
+			209 = {
+				add_core_of = BLR
+			}
+			210 = {
+				add_core_of = BLR
+			}			
+			747 = {
+				add_core_of = BLR
+			}
+			195 = {
+				add_core_of = GER
+			}
+			BLR = { country_event = { id = modcolonies.1 days = 364 }}
+		}
+	}
+	option = {
+		name = modgermany.9.a	#sounds good
+		ai_chance = { factor = 90 }		
+		set_autonomy = {
+			target = BLR
+			autonomy_state = autonomy_colony
+		}		
+		BLR = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			set_cosmetic_tag = RKO
+			create_country_leader = {
+				name = "Hinrich Lohse"
+				desc = ""
+				picture = "gfx/leaders/BLR/Portrait_BLR_Hinrich_Lohse.dds"
+				expire = "1965.1.1"
+				ideology = nazism
+				traits = {
+				#
+				}
+			}
+			set_party_name = { ideology = fascism long_name = GER_fascism_party_long name = GER_fascism_party}
+			
+		}
+		if = {
+			limit = {
+				204 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 204
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 204
+							}							
+						}
+						
+					}
+				}
+			}	
+			BLR = { 
+				transfer_state = 204
+				set_state_controller = 204
+			}
+		}	
+		if = {
+			limit = {
+				206 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 206
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 206
+							}							
+						}
+						
+					}
+				}
+			}
+		
+			BLR = { 
+				transfer_state = 206
+				set_state_controller = 206
+			}
+		}			
+		if = {
+			limit = {
+				207 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 207
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 207
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 207
+				set_state_controller = 207
+			}
+		}
+		if = {
+			limit = {
+				241 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 241
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 241
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 241
+				set_state_controller = 241
+			}
+		}		
+		if = {
+			limit = {
+				209 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 209
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 209
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 209
+				set_state_controller = 209
+			}
+		}		
+		if = {
+			limit = {
+				210 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 210
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 210
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 210
+				set_state_controller = 210
+			}
+		}		
+		if = {
+			limit = {
+				208 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 208
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 208
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 208
+				set_state_controller = 208
+			}
+		}	
+		if = {
+			limit = {
+				95 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 95
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 95
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 95
+				set_state_controller = 95
+			}
+		}		
+		if = {
+			limit = {
+				96 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 96
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 96
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 96
+				set_state_controller = 96
+			}
+		}		
+		if = {
+			limit = {
+				12 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 12
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 12
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 12
+				set_state_controller = 12
+			}
+		}		
+		if = {
+			limit = {
+				190 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 190
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 190
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 190
+				set_state_controller = 190
+			}
+		}		
+		if = {
+			limit = {
+				189 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 189
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 189
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 189
+				set_state_controller = 189
+			}
+		}		
+		if = {
+			limit = {
+				11 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 11
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 11
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 11
+				set_state_controller = 11
+			}
+		}		
+		if = {
+			limit = {
+				191 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 191
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 191
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 191
+				set_state_controller = 191
+			}
+		}		
+		if = {
+			limit = {
+				13 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 13
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 13
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 13
+				set_state_controller = 13
+			}
+		}
+		if = {
+			limit = {
+				747 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 747
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 747
+							}							
+						}
+						
+					}
+				}
+			}
+			BLR = { 
+				transfer_state = 747
+				set_state_controller = 747
+			}
+		}		
+
+		BLR = {
+			add_ideas = disarmed_nation
+			add_ideas = tot_economic_mobilisation
+			add_ideas = GER_antisemitism
+			add_ideas = GER_OST
+		}
+		if = {
+			limit = {
+				LIT = {
+					exists = yes
+					NOT = {
+						is_in_faction_with = GER
+						is_subject_of = GER
+					}
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LIT
+			}
+		}
+		if = {
+			limit = {
+				LAT = {
+					exists = yes
+					NOT = {
+						is_in_faction_with = GER
+						is_subject_of = GER
+					}
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LAT
+			}
+		}
+		if = {
+			limit = {
+				EST = {
+					exists = yes
+					NOT = {
+						is_in_faction_with = GER
+						is_subject_of = GER
+					}
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = EST
+			}
+		}		
+	}
+	option = {
+		name = modgermany.9.b	#no way
+		ai_chance = { factor = 10 }
+	}
+}
+
+# KAUKASUS
+country_event = {
+	id = modgermany.10
+	title = modgermany.10.t
+	desc = modgermany.10.d
+	picture = GFX_report_event_german_troops
+	fire_only_once = yes
+	trigger = {
+		tag = GER
+		has_government = fascism
+		231 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 231
+					is_in_faction_with = GER
+					NOT = {
+						owns_state = 231
+					}					
+				}
+			}	
+		}
+		GEO = {
+			OR = {
+				has_capitulated = yes 
+				exists = no
+			}
+			NOT = {
+				is_in_faction_with = GER
+				is_subject_of = GER
+			}
+		}
+		SOV = {
+			NOT = {
+				is_in_faction_with = GER
+			}
+		}
+	}
+	immediate = { GEO = { country_event = { id = modcolonies.1 days = 364 }}}	
+	option = {
+		name = modgermany.10.a	#sounds good
+		ai_chance = { factor = 90 }		
+		set_autonomy = {
+			target = GEO
+			autonomy_state = autonomy_puppet
+		}		
+		GEO = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			set_cosmetic_tag = RKK
+			create_country_leader = {
+				name = "Hermann Neubacher"
+				desc = ""
+				picture = "gfx/leaders/GEO/Portrait_GEO_Hermann_Neubacher.dds"
+				expire = "1965.1.1"
+				ideology = nazism
+				traits = {
+				#
+				}
+			}
+			set_party_name = { ideology = fascism long_name = GER_fascism_party_long name = GER_fascism_party}
+		}
+
+		if = {
+			limit = {
+				234 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 234
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 234
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 234
+				set_state_controller = 234
+			}
+		}
+		if = {
+			limit = {
+				238 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 238
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 238
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 238
+				set_state_controller = 238
+			}
+		}		
+		if = {
+			limit = {
+				237 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 237
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 237
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 237
+				set_state_controller = 237
+			}
+		}		
+		if = {
+			limit = {
+				236 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 236
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 236
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 236
+				set_state_controller = 236
+			}
+		}		
+		if = {
+			limit = {
+				233 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 233
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 233
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 233
+				set_state_controller = 233
+			}
+		}		
+		if = {
+			limit = {
+				231 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 231
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 231
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 231
+				set_state_controller = 231
+			}
+		}		
+		if = {
+			limit = {
+				230 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 230
+							is_in_faction_with = GER
+							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 230
+				set_state_controller = 230
+			}
+		}		
+		if = {
+			limit = {
+				229 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 229
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 229
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 229
+				set_state_controller = 229
+			}
+		}		
+		if = {
+			limit = {
+				232 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 232
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 232
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 232
+				set_state_controller = 232
+			}
+		}		
+		if = {
+			limit = {
+				235 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 235
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 235
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 235
+				set_state_controller = 235
+			}
+		}	
+		if = {
+			limit = {
+				406 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 406
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 406
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 406
+				set_state_controller = 406
+			}
+		}		
+		if = {
+			limit = {
+				407 = {
+					OR = {
+						is_controlled_by = GER
+						any_other_country = {
+							controls_state = 407
+							is_in_faction_with = GER
+							NOT = {
+								owns_state = 407
+							}							
+						}
+						
+					}
+				}
+			}
+			GEO = { 
+				transfer_state = 407
+				set_state_controller = 407
+			}
+		}				
+		GEO = {
+			add_ideas = disarmed_nation
+			add_ideas = tot_economic_mobilisation
+			add_ideas = GER_antisemitism
+			add_ideas = GER_OST
+		}
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_owned_by = GEO
+				}
+				add_core_of = GEO
+			}
+			234 = {
+				add_core_of = GEO
+			}
+			238 = {
+				add_core_of = GEO
+			}
+			237 = {
+				add_core_of = GEO
+			}
+			236 = {
+				add_core_of = GEO
+			}
+			233 = {
+				add_core_of = GEO
+			}
+			231 = {
+				add_core_of = GEO
+			}
+			230 = {
+				add_core_of = GEO
+			}
+			229 = {
+				add_core_of = GEO
+			}
+			232 = {
+				add_core_of = GEO
+			}
+			235 = {
+				add_core_of = GEO
+			}
+			406 = {
+				add_core_of = GEO
+			}
+			407 = {
+				add_core_of = GEO
+			}			
+		}
+	}
+	option = {
+		name = modgermany.10.b	#sounds good
+		ai_chance = { factor = 10 }
+	}
+}
+
+# MOSKOWIEN #
+country_event = {
+	id = modgermany.11
+	title = modgermany.11.t
+	desc = modgermany.11.d
+	picture = GFX_report_event_german_troops
+	trigger = {
+		tag = GER
+		has_government = fascism
+		219 = {
+			OR = {
+				is_controlled_by = GER
+				any_other_country = {
+					controls_state = 219
+					is_in_faction_with = GER
+					NOT = {
+						owns_state = 219
+					}					
+				}
+			}	
+		}
+		RKM = {
+			exists = no
+		}
+		SOV = {
+			NOT = {
+				is_in_faction_with = GER
+			}
+		}
+	}
+	immediate = { RKM = { country_event = { id = modcolonies.1 days = 364 }}}	
+	option = {
+		name = modgermany.11.a 
+		set_autonomy = {
+			target = RKM
+			autonomy_state = autonomy_colony
+		}
+		RKM = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+		}
+		if = {	
+			limit = {			
+					219 = {
+						OR = {
+							any_other_country = {
+								controls_state = 219
+								is_subject_of = GER
+							
+							}				
+							is_owned_by = GER
+						}
+					}
+				}	
+				RKM = { transfer_state = 219 }
+			}
+
+		if = {
+			limit = {			
+				242 = {
+					OR = {
+						any_other_country = {
+							controls_state = 242
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 242 }
+		}
+		if = {
+			limit = {			
+				243 = {
+					OR = {
+						any_other_country = {
+							controls_state = 243
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 243 }
+		}
+		if = {
+			limit = {			
+				205 = {
+					OR = {
+						any_other_country = {
+							controls_state = 205
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 205 }
+		}
+		if = {
+			limit = {			
+				223 = {
+					OR = {
+						any_other_country = {
+							controls_state = 223
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 223 }
+		}
+		if = {
+			limit = {			
+				246 = {
+					OR = {
+						any_other_country = {
+							controls_state = 246
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 246 }
+		}
+		if = {
+			limit = {			
+				247 = {
+					OR = {
+						any_other_country = {
+							controls_state = 247
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 247 }
+		}
+		if = {
+			limit = {			
+				263 = {
+					OR = {
+						any_other_country = {
+							controls_state = 263
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 263 }
+		}
+		if = {
+			limit = {			
+				244 = {
+					OR = {
+						any_other_country = {
+							controls_state = 244
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 244 }
+		}
+		if = {
+			limit = {			
+				264 = {
+					OR = {
+						any_other_country = {
+							controls_state = 264
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 264 }
+		}
+		if = {
+			limit = {			
+				254 = {
+					OR = {
+						any_other_country = {
+							controls_state = 254
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 254 }
+		}
+		if = {
+			limit = {			
+				351 = {
+					OR = {
+						any_other_country = {
+							controls_state = 351
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 351 }
+		}
+		if = {
+			limit = {			
+				248 = {
+					OR = {
+						any_other_country = {
+							controls_state = 248
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 248 }
+		}
+		if = {
+			limit = {			
+				253 = {
+					OR = {
+						any_other_country = {
+							controls_state = 253
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 253 }
+		}
+		if = {
+			limit = {			
+				214 = {
+					OR = {
+						any_other_country = {
+							controls_state = 214
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 214 }
+		}
+		if = {
+			limit = {			
+				252 = {
+					OR = {
+						any_other_country = {
+							controls_state = 252
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 252 }
+		}
+		if = {
+			limit = {			
+				255 = {
+					OR = {
+						any_other_country = {
+							controls_state = 255
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 255 }
+		}
+		if = {
+			limit = {			
+				250 = {
+					OR = {
+						any_other_country = {
+							controls_state = 250
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 250 }
+		}
+		if = {
+			limit = {			
+				256 = {
+					OR = {
+						any_other_country = {
+							controls_state = 256
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 256 }
+		}
+		if = {
+			limit = {			
+				251 = {
+					OR = {
+						any_other_country = {
+							controls_state = 251
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 251 }
+		}
+		if = {
+			limit = {			
+				249 = {
+					OR = {
+						any_other_country = {
+							controls_state = 249
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 249 }
+		}
+		if = {
+			limit = {			
+				652 = {
+					OR = {
+						any_other_country = {
+							controls_state = 652
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 652 }
+		}
+		if = {
+			limit = {			
+				651 = {
+					OR = {
+						any_other_country = {
+							controls_state = 651
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 651 }
+		}
+		if = {
+			limit = {			
+				399 = {
+					OR = {
+						any_other_country = {
+							controls_state = 399
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 399 }
+		}
+		if = {
+			limit = {			
+				400 = {
+					OR = {
+						any_other_country = {
+							controls_state = 400
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 400 }
+		}
+		if = {
+			limit = {			
+				398 = {
+					OR = {
+						any_other_country = {
+							controls_state = 398
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 398 }
+		}
+		if = {
+			limit = {			
+				397 = {
+					OR = {
+						any_other_country = {
+							controls_state = 397
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 397 }
+		}
+		if = {
+			limit = {			
+				262 = {
+					OR = {
+						any_other_country = {
+							controls_state = 262
+							is_subject_of = GER
+							
+						}				
+						is_owned_by = GER
+					}
+				}
+			}
+			RKM = { transfer_state = 262 }
+		}		
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_owned_by = RKM
+				}
+				add_core_of = RKM
+			}
+			RKM = {
+				add_ideas = disarmed_nation
+				add_ideas = tot_economic_mobilisation
+				add_ideas = GER_antisemitism
+				add_ideas = GER_OST
+			}
+		}
+
+	}
+	option = {
+		name = modgermany.11.b
+		add_national_unity = -5
+	}
+}
+
+
+
+# Bitter Peace #
+#country_event = {
+#	name = modgermany.12
+#	title = modgermany.12.t
+#	desc = modgermany.12.d
+#	picture = GFX_report_event_german_troops
+#	trigger = {
+#		tag = GER
+#		has_government = fascism
+#		has_war_with = SOV
+#		SOV = {
+#			exists = yes
+#			has_government = communism
+#		}
+#		OR = {
+#			AND = {
+#				RKM = {
+#					exists = yes
+#					is_subject_of = GER
+#				}
+#				GEO = {
+#					exists = yes
+#					is_subject_of = GER
+#					has_cosmetic_tag = RKK
+#				}
+#				BLR = {
+#					exists = yes
+#					is_subject_of = GER
+#					has_cosmetic_tag = RKO
+#				}
+#				UKR = {
+#					exists = yes
+#					is_subject_of = GER
+#					has_cosmetic_tag = RKU
+#				}
+#			}
+#			AND = {
+#				202 = {
+#					OR = {
+#						is_controlled_by = GER
+#						any_other_country = {
+#						controls_state = 202
+#						is_in_faction_with = GER
+#						NOT = {
+#							owns_state = 202
+#						}					
+#					}
+#				}
+#			}
+#				202 = {
+#					OR = {
+#						is_controlled_by = GER
+#						any_other_country = {
+#						controls_state = 202
+#						is_in_faction_with = GER
+#						NOT = {
+#							owns_state = 202
+#						}										# ALL THE REICHKOMM C#APTIALS
+#					}
+#				}
+#			}
+#			202 = {
+#					OR = {
+#						is_controlled_by = GER
+#						any_other_country = {
+#						controls_state = 202
+#						is_in_faction_with = GER
+#						NOT = {
+#							owns_state = 202
+#						}					
+#					}
+#				}
+#			}
+#			202 = {
+#					OR = {
+#						is_controlled_by = GER
+#						any_other_country = {
+#						controls_state = 202
+#						is_in_faction_with = GER
+#						NOT = {
+#							owns_state = 202
+#						}					
+#					}
+#				}
+#			}
+#
+#		}
+#	}
+}#
+#	immediate = {
+#	# ALL PROVINCE NAMES AND STUFF #
+#
+#	}
+#	option = {
+#		name = modgermany.12.a # sounds good
+#				
+#	}
+}#
+#
+#
+#
+

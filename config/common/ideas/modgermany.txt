@@ -1,0 +1,100 @@
+ideas = {
+	country = {
+		GER_antisemitism = {
+			picture = antisemitism
+			allowed = {
+				always = no # Added via Event
+			}
+			removal_cost = -1
+			
+			modifier = {
+				fascism_drift = +0.1
+				conscription_factor = -0.01
+			}
+		}
+		GER_OST = {
+			picture = ost
+			allowed = {
+				always = no # Added via Event
+			}
+			removal_cost = -1
+			
+			modifier = {
+				conscription_factor = -0.63
+				industrial_capacity_factory = 0.10
+				unity_factor = -0.50
+				army_morale_factor = -0.2				
+			}
+		}
+		GER_OST_2 = {
+			picture = ost
+			allowed = {
+				always = no # Added via Event
+			}
+			removal_cost = -1
+			
+			modifier = {
+				conscription_factor = -0.53
+				industrial_capacity_factory = 0.85
+				unity_factor = -0.50
+				army_morale_factor = -0.2				
+			}
+		}
+		GER_OST_3 = {
+			picture = ost
+			allowed = {
+				always = no # Added via Event
+			}
+			removal_cost = -1
+			
+			modifier = {
+				conscription_factor = -0.43
+				industrial_capacity_factory = 0.70
+				unity_factor = -0.50
+				army_morale_factor = -0.2				
+			}
+		}
+		GER_OST_4 = {
+			picture = ost
+			allowed = {
+				always = no # Added via Event
+			}
+			removal_cost = -1
+			
+			modifier = {
+				conscription_factor = -0.33
+				industrial_capacity_factory = 0.55
+				unity_factor = -0.50
+				army_morale_factor = -0.2				
+			}
+		}
+		GER_OST_5 = {
+			picture = ost
+			allowed = {
+				always = no # Added via Event
+			}
+			removal_cost = -1
+			
+			modifier = {
+				conscription_factor = -0.23
+				industrial_capacity_factory = 0.40
+				unity_factor = -0.50
+				army_morale_factor = -0.2				
+			}
+		}
+		GER_OST_6 = {
+			picture = ost
+			allowed = {
+				always = no # Added via Event
+			}
+			removal_cost = -1
+			
+			modifier = {
+				conscription_factor = -0.13
+				industrial_capacity_factory = 0.25
+				unity_factor = -0.50
+				army_morale_factor = -0.2				
+			}
+		}									
+	}
+}	

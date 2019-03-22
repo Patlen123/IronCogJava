@@ -1,0 +1,46 @@
+﻿add_namespace = modczech
+
+#NO MORE BHN
+country_event = {
+	id = modczech.1
+	title = modczech.1.t
+	desc = modczech.1.d
+	picture = GFX_report_event_hitler_handshake
+	mean_time_to_happen = { days = 2 }		
+	trigger = {
+		tag = CZE
+		has_cosmetic_tag = BHN
+		NOT = {
+			is_subject_of = GER
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			reset_province_name = 11542
+			reset_province_name = 6418
+			reset_province_name = 3569			
+		}
+	}
+	option = {
+		name = modczech.1.a #sounds good
+		drop_cosmetic_tag = yes
+		create_country_leader = {
+			name = "Radola Gajda"
+			desc = ""
+			picture = "gfx/leaders/CZE/Portrait_CZE_Radola_Gajda.dds"
+			expire = "1965.1.1"
+			ideology = fascism_ideology
+			traits = {
+				#
+			}
+		}
+		set_party_name = { ideology = fascism long_name = CZE_fascism_party_long name = CZE_fascism_party}
+		every_state = {
+			limit = {
+				is_owned_by = CZE
+			}
+			add_core_of = CZE
+		}
+		remove_ideas = GER_antisemitism	
+	}
+}

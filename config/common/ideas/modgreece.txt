@@ -1,0 +1,26 @@
+ideas = {
+	country = {
+		GRE_george_ii = {
+			picture = george_ii
+			
+			allowed = {
+				original_tag = GRE
+			}
+			removal_cost = -1
+			
+			traits = { popular_figurehead }
+		}
+	}
+	country = {
+		GRE_georgios_i = {
+			picture = georgios_i
+			
+			allowed = {
+				original_tag = GRE
+			}
+			removal_cost = -1
+			
+			traits = { popular_figurehead }
+		}
+	}
+}

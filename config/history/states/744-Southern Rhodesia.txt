@@ -1,0 +1,30 @@
+state={
+	id=744
+	name="STATE_744"
+	provinces={
+		1874 2151 2216 4851 7842 10929 
+	}
+	resources={
+		chromium=64.000
+		tungsten=16.000
+	}
+	history={
+		owner = ENG
+		buildings = {
+			infrastructure = 3
+
+		}
+		victory_points = {
+			10929 5
+
+		}
+		victory_points = {
+			4851 1		
+		}
+		add_core_of = ZIM
+
+	}
+	manpower=4000000
+	buildings_max_level_factor=1.000
+	state_category=rural
+}

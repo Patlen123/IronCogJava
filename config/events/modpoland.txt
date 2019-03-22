@@ -1,0 +1,73 @@
+﻿add_namespace = modpoland
+
+#NO MORE GGM
+country_event = {
+	id = modpoland.1
+	title = modpoland.1.t
+	desc = modpoland.1.d
+	picture = GFX_report_event_hitler_handshake
+	mean_time_to_happen = { days = 2 }		
+	trigger = {
+		tag = POL
+		has_cosmetic_tag = GGM
+		NOT = {
+			is_subject_of = GER
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			reset_province_name = 6558
+			reset_province_name = 9263
+			reset_province_name = 9508
+			reset_province_name = 9427
+			reset_province_name = 3544	
+			reset_province_name = 11479		
+			reset_province_name = 3392			
+		}
+	}
+	option = {
+		name = modpoland.1.a #sounds good
+		drop_cosmetic_tag = yes
+		create_country_leader = {
+			name = "Boleslaw Piasecki"
+			desc = "POLITICS_BOLESLAW_PIASECKI_DESC"
+			picture = "GFX_POL_boleslaw_piasecki"
+			expire = "1965.1.1"
+			ideology = falangism
+			traits = {
+				#
+			}
+		}
+		set_party_name = { ideology = fascism long_name = POL_fascism_party_long name = POL_fascism_party}
+		every_state = {
+			limit = {
+				is_owned_by = POL
+			}
+			add_core_of = POL
+		}
+		remove_ideas = POL_ghettos
+		remove_ideas = POL_arbeiter
+		remove_ideas = GER_antisemitism
+	}
+}
+country_event = {
+	id = modpoland.2
+	title = modpoland.2.t
+	desc = modpoland.2.d
+	mean_time_to_happen = { days = 2 }
+	trigger = {
+		tag = POL
+		has_cosmetic_tag = GGM
+		is_subject_of = GER
+		NOT = {
+			has_country_flag = POL_KRAKAU_SET
+		}
+	}
+	immediate = {
+		set_capital = 88
+		set_country_flag = POL_KRAKAU_SET
+	}
+	option = {
+	
+	}
+}

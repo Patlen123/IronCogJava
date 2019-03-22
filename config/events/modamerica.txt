@@ -1,0 +1,20 @@
+﻿add_namespace = modamerica
+
+#Second American Civil War
+country_event = {
+	id = modamerica.1
+	title = modamerica.1.t
+	desc = modamerica.1.d
+	picture = GFX_event_us_civil_war
+	is_triggered_only = yes
+	mean_time_to_happen = { days = 2 }	
+	option = {
+		name = modamerica.1.a	#USA
+	}
+	option = {
+		name = modamerica.1.b	#CSA
+	}
+	option = {
+		name = modamerica.1.c	#Commie
+	}
+}

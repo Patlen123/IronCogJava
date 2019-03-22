@@ -1,0 +1,58 @@
+ideas = {
+country = {	
+	super_extreme = {
+		removal_cost = -1
+			
+		allowed = {
+			always = no # Added via focus
+		}
+
+		allowed_civil_war = {
+			has_government = democratic
+		}
+		modifier = {
+			fascism_drift = -0.1
+			fascism_acceptance = -100
+			communism_drift = -0.1
+			communism_acceptance = -100
+		}
+	}
+	revolution_global = {
+		removal_cost = -1
+			
+		allowed = {
+			always = no # Added via focus
+		}
+
+		allowed_civil_war = {
+			has_government = communism
+		}
+		picture = revolution_global
+		modifier = {
+			drift_defence_factor = 0.5
+			production_speed_buildings_factor = -0.1
+		}
+		rule = {
+			can_create_factions = yes
+		}
+	}
+	young_republic = {
+			allowed = {
+				always = no # Added via focus
+			}
+			allowed_civil_war = {
+				has_government = communism
+			}			
+			research_bonus = {
+				land_doctrine = 0.05
+			}
+			picture = young_republic
+			modifier = {
+				unity_factor = 0.05
+				drift_defence_factor = 0.5
+				communism_drift = 0.1		
+			}			
+	}
+}
+
+}

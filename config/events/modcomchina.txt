@@ -1,0 +1,40 @@
+﻿## Communist China ##
+add_namespace = modcomchina
+country_event = {
+	id = modcomchina.1
+	title = modcomchina.1.t
+	desc = modcomchina.1.d
+	picture = GFX_event_PRC_FRONT
+	fire_only_once = yes
+	trigger = {
+		tag = PRC
+		is_in_faction_with = CHI
+	}
+	mean_time_to_happen = { days = 2 }		
+	option = {
+		name = modcomchina.1.a	#sounds good
+		ai_chance = { factor = 90 }
+		drop_cosmetic_tag = yes
+		set_cosmetic_tag = PRC_FRONT
+	}
+}
+#BECOME PRC#
+country_event = {
+	id = modcomchina.2
+	title = modcomchina.2.t
+	desc = modcomchina.2.d
+	picture = GFX_event_PRC_PRO
+	fire_only_once = yes
+	trigger = {
+		tag = PRC
+		CHI = {
+			exists = no
+		}
+	}
+	mean_time_to_happen = { days = 2 }		
+	option = {
+		name = modcomchina.2.a	#sounds good
+		ai_chance = { factor = 90 }
+		drop_cosmetic_tag = yes
+	}
+}
