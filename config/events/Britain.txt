@@ -11,7 +11,9 @@ country_event = {
 	
 	option = {
 		name = britain.1.a	#sounds good
-		ai_chance = { factor = 90 }
+		ai_chance = {
+		    factor = 90
+		    }
 		add_political_power = -10
 		ENG = {
 			country_event = { days = 1 id = britain.2 }

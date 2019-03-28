@@ -2,13 +2,19 @@ package com.company;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.io.File;
-import java.io.FileNotFoundException;;
+import java.io.FileNotFoundException;
+import java.util.List;
 
-public class Event extends Object{
-	public static void main(String[] args){
-		nextTree("../config/test.txt");
+public class ReadEvent extends Object{
+	String strFilename;
+
+
+	public ReadEvent (String filename)	{
+		strFilename = filename;
+		nextTree(strFilename);
 	}
-	public static void nextTree(String fileName){
+
+	public static void nextTree(String fileName)	{
 		Scanner in = null;
 		try{
 			in = new Scanner(new File(fileName));
@@ -17,11 +23,15 @@ public class Event extends Object{
 			while(in.hasNextLine()){
 				String currentLine = in.nextLine();
 				lines++;
-
 				// Matches commented out code and removes it.
 				currentLine = currentLine.replaceAll("#.*$", "");
-				System.exit(0);
-				Scanner lineIn = new Scanner(currentLine);
+				if (currentLine.contains("{"))	{
+					Scanner lineIn = new Scanner(currentLine);
+				} else if (currentLine.contains("}"))	{
+
+				}
+
+
 			}
 				
 
