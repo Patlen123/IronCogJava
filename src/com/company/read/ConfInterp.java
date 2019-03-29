@@ -2,10 +2,8 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-
-
 public class ConfInterp{
-	public class file(String file){
+	public class Tree file(String file){
 		BufferedReader in = null;
 		Scanner in = null;
 		try{
@@ -32,6 +30,8 @@ public class ConfInterp{
 				}
 				lines++;
 			}
+			return Tree;
+		}
 
 
 		}catch(FileNotFoundException e){
