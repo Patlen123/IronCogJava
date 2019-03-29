@@ -2,6 +2,8 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
+
+/// 😊😊😊😊 LMAO WHO DID THIS 😊😊😊😊
 public class ConfInterp{
 	public class Tree file(String file){
 		BufferedReader in = null;
