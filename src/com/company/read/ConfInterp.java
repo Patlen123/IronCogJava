@@ -1,16 +1,13 @@
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
-<<<<<<< HEAD
 import java.util.InputMismatchException;
-                                                                                
-=======
 
+// I am forced to leave this in and waste precious bytes.
+// 😊😊😊😊 LMAO WHO DID THIS 😊😊😊😊
 
-/// 😊😊😊😊 LMAO WHO DID THIS 😊😊😊😊
->>>>>>> 3fddc890988d37ee76fb5b349311c9b0a192f3bf
 public class ConfInterp{
-	// Scans over 3 tokens, returns integer of the length of the next one
+	// Scans line, returns count of the words
 	public static int wordsOnLine(String line){
 		Scanner lineIn = new Scanner(line);
 		int words = 0;
@@ -23,6 +20,7 @@ public class ConfInterp{
 	public static MultiNode file(String file){
 
 		Scanner in = null;
+		// The tree of the file
 		MultiNode fileTree =
 			// Root node id is the filename, filter to filename only
 			new MultiNode(file.replaceAll("^.*/", ""));
@@ -34,15 +32,17 @@ public class ConfInterp{
 			while(in.hasNextLine()){
 				lines++;
 				currentLine = in.nextLine();
+				// Removes all commented out text
 				currentLine = currentLine.replaceAll("#.*$", "");
 				
 				Scanner lineIn = new Scanner(currentLine);
-				int words = wordsOnLine(currentLine);
-				switch(words){
+				// Based on how many words are on a line
+				switch(wordsOnLine(currentLine)){
 				case 0:
-					
+					// Empty line, can be safely ignored
 					break;
 				case 1:
+					// Can either be a tree closing bracket or an option
 					String opt = lineIn.next();
 					if (opt.equals("}")){
 						fileTree.leaveTree();
@@ -54,7 +54,8 @@ public class ConfInterp{
 					}
 					break;
 
-				case 3:	
+				case 3:
+					// Can either be a new tree or a variable declaration
 					String id = lineIn.next();
 					if (!lineIn.next().equals("=")){
 						throw new InputMismatchException("error: line " + lines
@@ -67,9 +68,9 @@ public class ConfInterp{
 						fileTree.appendElement(id,data);
 					}
 					break;
-
+					
 				default:
-					System.out.println(words);
+					// If none of the above, the file is incorrectly formatted.
 					throw new InputMismatchException("error: line " + lines +
 													 "is incorrectly formatted.");
 				}

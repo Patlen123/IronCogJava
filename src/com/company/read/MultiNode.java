@@ -57,41 +57,72 @@ public class MultiNode{
 		this.content = new ArrayList<MultiNode>();
 	}
 
+	// Constructor for creating an option node 
 	private MultiNode(char classifier, String opt){
 		this.nodeMode = "option";
 		this.id = opt;
 	}
 
-	// public boolean isTree(){
-	// 	return (nodeMode.equals("tree"));
-	// }
-
+	// Get the node mode of the current node
 	public String getNodeMode(){
 		return nodeMode;
 	}
+
+	/* Methods relating to tree nodes */
+	// Creates a new tree and changes current tree to it
 	public void newTree(String id){
 		MultiNode tmp = new MultiNode(id, currentTree);
 		currentTree.content.add(tmp);
 		currentTree = tmp;
 	}
-	public String getID(){
-		return this.id;
-	}
 
+	// Changes the current tree to the parent
 	public void leaveTree(){
 		currentTree = currentTree.lastTree;
 	}
+	// Closes the current tree, when creation has finished
 	public void closeTree(){
 		currentTree = null;
 	}
 
+	/* Append methods */
+	// Appends an element node to the current tree
 	public void appendElement(String id, String element){
 		currentTree.content.add(new MultiNode(id, element));
 	}
+
+	// Appends an option node to the current tree
 	public void appendOption(String opt){
 		currentTree.content.add(new MultiNode('o', opt));
 	}
 
+	/* Getters */
+	public String getID(){
+		return this.id;
+	}
+
+	public String getOption(){
+		if (this.nodeMode == "option"){
+			return this.id;
+		}
+		return null;
+	}
+
+	public String getData(){
+		if (this.nodeMode == "data"){
+			return this.data;
+		}
+		return null;
+	}
+
+	public String getTree(){
+		if (this.nodeMode == "tree"){
+			return this.content;
+		}
+		return null;
+	}
+
+	// Returns a human readable tree-like string
 	public String toString(){
 		String out = "";
 		String inTemp = indentation;
