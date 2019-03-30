@@ -1,8 +1,14 @@
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+<<<<<<< HEAD
 import java.util.InputMismatchException;
                                                                                 
+=======
+
+
+/// 😊😊😊😊 LMAO WHO DID THIS 😊😊😊😊
+>>>>>>> 3fddc890988d37ee76fb5b349311c9b0a192f3bf
 public class ConfInterp{
 	// Scans over 3 tokens, returns integer of the length of the next one
 	public static int wordsOnLine(String line){
