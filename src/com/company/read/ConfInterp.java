@@ -7,16 +7,130 @@ import java.util.InputMismatchException;
 // 😊😊😊😊 LMAO WHO DID THIS 😊😊😊😊
 
 public class ConfInterp{
-	// Scans line, returns count of the words
-	public static int wordsOnLine(String line){
-		Scanner lineIn = new Scanner(line);
-		int words = 0;
-		while(lineIn.hasNext()){
-			lineIn.next();
-			words++;
+
+	// Scans a string that is predetermined to be of a colour. 
+	// If preparing a string, make sure it's at least 5 words long,
+	// otherwise it might be too short
+	private static ColorNode parseColor(String color){
+		Scanner in = new Scanner(color);
+		String name  = in.next();
+		// Second element is always an "=", otherwise fail
+		if (!in.next().equals("=")){
+			throw new InputMismatchException("error: color parameter not properly formatted.");
 		}
-		return words;
+
+		String colorModel = in.next();
+		// This might be interpretted incorrectly if color model is not
+		// present. If this is not the case, skips the one after.
+		if (colorModel.equals("{")) {
+			String colorModel = "rgb";
+		} else {
+			if (!in.next().equals("{")) {
+				throw new InputMismatchException("error: color parameter not properly formatted.");
+			}
+		}
+		
+		if (colorModel.equals("rgb")) {
+			// RGB is formatted in 3 ints
+			int[] rgbColor = new int[3];
+			for (int i = 0; i < 3; i++) {
+				rgbColor = in.nextInt();
+			}
+			// One final check whether the string is right
+			if (!in.next().equals("}")) {
+				throw new InputMismatchException("error: color parameter improperly formatted.");
+			}
+			return new ColorNode(name, colorModel,
+								 rgbColor[0],
+								 rgbColor[1],
+								 rgbColor[2]);
+		}
+
+		if (colorModel.equals("HSV")) {
+			// HSV is formatted in 3 doubles
+			double[] hsvColor = new double[3];
+			for (int i = 0; i < 3; i++) {
+				hsvColor[i] = in.nextDouble();
+			}
+			// One final check whether the string is right
+			if (!in.next().equals("}")) {
+				throw new InputMismatchException("error: color parameter improperly formatted.");
+			}
+			return new ColorNode(name, colorModel,
+								 hsvColor[0],
+								 hsvColor[1],
+								 hsvColor[2]);
+		}
+
+		// We can't identify the color model, we can't read it in
+		throw new InputMismatchException("error: unknown color model \"" +
+										 colorModel + "\"");
+
+
 	}
+
+	private static Node nextParameter(String input){
+		Scanner in = new Scanner(input);
+		String[] element = new String[3];
+		element[0] = in.next();
+
+		// Number at least once, followed by an '=', '{', 
+		// and another number, a space and '}'.
+		if (element[0].matches("^[0-9]+={ *[0-9]+ *}$")) {
+			// make a TreeNode of that type
+			return returnTreeNode;
+		}
+		// Matches an ending bracket
+		if (element[0].matches("}")) {
+			// I have no idea how to communicate this,
+			// but think of something.
+			// Idea: make it so the only time that this returns null,
+			// the tree has ended and we need to jump out of it.
+			// Idea: if you see a {, call a recursive method and return
+			// the entire tree
+			return null;
+		}
+		
+		// color keyword indicates next strings will be a color
+		if (element[0].matches("color") ||
+			element[0].matches("color_ui")) {
+			String colorElement = element[0];
+			for (int i = 0; i < 6; i++) {
+				colorElement = " " + in.next();
+			}
+			return parseColor(colorElement);
+		}
+
+
+		// Cannot analyze what to do based on element[0], continuing.
+		element[1] = in.next();
+		// If this is not an equals sign, the previous
+		// element was an option, therefore return it.
+		if (!element[1].matches("^=$")) {
+			// make an Option of element[0]
+			return returnTreeNode;	
+		}
+
+		// Cannot analyze what to do based on element[1], continuing.
+		element[3] = in.next();
+		if (element[3].equals("{")) {
+			// haha recursion but much more complex:
+			// parseTree uses this method and recurviely calls itself
+			// if a tree is in change, uses null to find end of tree
+			parseTree(in);
+		}
+
+		
+		
+
+		
+
+		
+		
+	}
+
+	
+	// Returns the paramater tree created from the file
 	public static MultiNode file(String file){
 
 		Scanner in = null;
